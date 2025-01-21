@@ -66,22 +66,22 @@ public class GameScreen {
         // Ball collision with paddles
         if (ball.collidesWith(leftPaddle)) {
             ball.reverseXDirection();
-            ball.increaseSpeed();
+            //ball.increaseSpeed();
         }
         if (ball.collidesWith(rightPaddle)) {
             ball.reverseXDirection();
-            ball.increaseSpeed();
+            //ball.increaseSpeed();
         }
 
         // If the ball goes out of bounds, update the score
         if (ball.getX() <= 0) {
             rightScore++; // Right player scores
             ball.resetPosition(300, 250);
-            ball.resetSpeed();
+            //ball.resetSpeed();
         } else if (ball.getX() >= 600) {
             leftScore++; // Left player scores
             ball.resetPosition(300, 250);
-            ball.resetSpeed();
+            //ball.resetSpeed();
         }
 
         // Check if either player reaches 10 points
