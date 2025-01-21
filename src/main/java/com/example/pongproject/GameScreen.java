@@ -5,14 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.geometry.Pos;
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.paint.Color;
+
 
 public class GameScreen {
     private static Ball ball;
@@ -25,11 +25,18 @@ public class GameScreen {
     private static final double PADDLE_LIMIT = 500;
     private static Set<KeyCode> activeKeys = new HashSet<>();
 
+
+    private static void resetScore() {
+        leftScore = 0;
+        rightScore = 0;
+    }
+
     public static void display(Stage primaryStage) {
+        resetScore();
         gameStage = primaryStage;
         ball = new Ball(300, 250);
-        leftPaddle = new Paddle(10, 200, 10, 100);
-        rightPaddle = new Paddle(580, 200, 10, 100);
+        leftPaddle = new Paddle(10, 200, 15, 100);
+        rightPaddle = new Paddle(575, 200, 15, 100);
 
         Canvas canvas = new Canvas(600, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -37,6 +44,8 @@ public class GameScreen {
         Scene scene = new Scene(new StackPane(canvas), 600, 500);
         scene.setOnKeyPressed(e -> activeKeys.add(e.getCode()));
         scene.setOnKeyReleased(e -> activeKeys.remove(e.getCode()));
+
+        scene.setFill(Color.LIGHTBLUE);
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
@@ -84,13 +93,22 @@ public class GameScreen {
     }
 
     private static void render(GraphicsContext gc) {
-        gc.setFill(javafx.scene.paint.Color.BLACK);
+        // Hintergrundfarbe (hellblau)
+        gc.setFill(Color.LIGHTBLUE);
         gc.fillRect(0, 0, 600, 500);
-        gc.setFill(javafx.scene.paint.Color.WHITE);
+
+        // Zeichne den Ball und die Paddles
+        gc.setFill(Color.WHITE); // Dunkelblauer Ball und Paddles
         gc.fillOval(ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius());
         gc.fillRect(leftPaddle.getX(), leftPaddle.getY(), leftPaddle.getWidth(), leftPaddle.getHeight());
         gc.fillRect(rightPaddle.getX(), rightPaddle.getY(), rightPaddle.getWidth(), rightPaddle.getHeight());
+
+        // Zeige den Punktestand an (Textfarbe dunkelblau)
+        gc.setFill(Color.WHITE);
         gc.fillText("Left: " + leftScore, 50, 30);
         gc.fillText("Right: " + rightScore, 500, 30);
+        gc.setFont(Font.font("Arial", FontWeight.BOLD, 20));
     }
+
 }
+

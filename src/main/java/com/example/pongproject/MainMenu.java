@@ -15,13 +15,19 @@ public class MainMenu {
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
 
+        // Setze die Hintergrundfarbe auf hellblau
+        layout.setStyle("-fx-background-color: lightblue;");
+
         // Text-Label für den Titel, jetzt viel größer und fett
         Text title = new Text("Pong Game");
-        title.setFill(Color.BLACK); // Setzt die Farbe des Textes auf schwarz
+        title.setFill(Color.WHITE); // Setzt die Farbe des Textes auf schwarz
         title.setFont(Font.font("Arial", FontWeight.BOLD, 50)); // Setzt die Schrift auf Arial, fett und Größe 50
 
         Button startButton = new Button("Start Game");
         Button quitButton = new Button("Quit");
+
+        startButton.setStyle("-fx-text-fill: darkblue;");
+        quitButton.setStyle("-fx-text-fill: darkblue;");
 
         startButton.setOnAction(e -> GameScreen.display(primaryStage));
         quitButton.setOnAction(e -> System.exit(0));
