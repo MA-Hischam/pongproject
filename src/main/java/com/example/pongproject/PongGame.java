@@ -4,10 +4,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class PongGame extends Application {
-
     @Override
     public void start(Stage primaryStage) {
-        // Startet das Main Menu
+        primaryStage.setTitle("Pong Game");
         MainMenu.display(primaryStage);
     }
 

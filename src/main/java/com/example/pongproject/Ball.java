@@ -1,60 +1,31 @@
 package com.example.pongproject;
 
 public class Ball {
-    private double x, y;
-    private double radius;
-    private double speedX, speedY;
+    private double x, y, speedX = 3, speedY = 3;
+    private final double radius = 15;
 
     public Ball(double x, double y) {
         this.x = x;
         this.y = y;
-        this.radius = 10;
-        this.speedX = 3;
-        this.speedY = 3;
     }
 
     public void move() {
         x += speedX;
         y += speedY;
+        if (y <= 0 || y >= 490) reverseYDirection();
     }
 
-    public void reverseXDirection() {
-        speedX = -speedX;
-    }
-
-    public void reverseYDirection() {
-        speedY = -speedY;
-    }
-
-    public void increaseSpeed() {
-        speedX *= 1.05;
-        speedY *= 1.05;
-    }
-
-    public void resetPosition(double startX, double startY) {
-        this.x = startX;
-        this.y = startY;
-    }
-
-    public void resetSpeed() {
-        this.speedX = 3;
-        this.speedY = 3;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
+    public void reverseXDirection() { speedX = -speedX; }
+    public void reverseYDirection() { speedY = -speedY; }
+    public void resetPosition(double startX, double startY) { x = startX; y = startY; }
+    public double getX() { return x; }
+    public double getY() { return y; }
+    public double getRadius() { return radius; }
 
     public boolean collidesWith(Paddle paddle) {
-        return (x >= paddle.getX() && x <= paddle.getX() + paddle.getWidth() &&
-                y >= paddle.getY() && y <= paddle.getY() + paddle.getHeight());
+        // Prüfen, ob der Ball mit dem Paddle kollidiert, wobei der Ballradius berücksichtigt wird
+        return (x + radius > paddle.getX() && x < paddle.getX() + paddle.getWidth() &&
+                y + radius > paddle.getY() && y < paddle.getY() + paddle.getHeight());
     }
+
 }
