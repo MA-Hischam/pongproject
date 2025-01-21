@@ -1,15 +1,12 @@
 package com.example.pongproject;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class PongGame extends Application {
-
     @Override
     public void start(Stage primaryStage) {
-        // Startet das Main Menu
+        primaryStage.setTitle("Pong Game");
         MainMenu.display(primaryStage);
     }
 
@@ -17,4 +14,3 @@ public class PongGame extends Application {
         launch(args);
     }
 }
-
