@@ -1,8 +1,6 @@
 package com.example.pongproject;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class PongGame extends Application {
@@ -17,4 +15,3 @@ public class PongGame extends Application {
         launch(args);
     }
 }
-

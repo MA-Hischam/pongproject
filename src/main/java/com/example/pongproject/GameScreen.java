@@ -1,10 +1,11 @@
 package com.example.pongproject;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class GameScreen {
@@ -15,12 +16,14 @@ public class GameScreen {
     private static int rightScore = 0;
     private static Stage primaryStage;
 
-
     public static void display(Stage primaryStage) {
         // Initialize the ball and paddles
         ball = new Ball(300, 250);
         leftPaddle = new Paddle(10, 250, 10, 100);
         rightPaddle = new Paddle(580, 250, 10, 100);
+
+        // Store the primaryStage in a static variable
+        GameScreen.primaryStage = primaryStage;
 
         Canvas canvas = new Canvas(600, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -87,8 +90,22 @@ public class GameScreen {
         } else if (rightScore == 10) {
             EndScreen.display(primaryStage, "Right Player");
         }
+
+        // Boundary checks for paddles
+        checkPaddleBounds(leftPaddle);
+        checkPaddleBounds(rightPaddle);
     }
 
+    private static void checkPaddleBounds(Paddle paddle) {
+        double minY = 0;
+        double maxY = 500 - paddle.getHeight(); // Adjust for the height of the canvas
+
+        if (paddle.getY() < minY) {
+            paddle.move(minY - paddle.getY());
+        } else if (paddle.getY() > maxY) {
+            paddle.move(maxY - paddle.getY());
+        }
+    }
 
     private static void render(GraphicsContext gc) {
         // Dark background color for the game screen
@@ -106,5 +123,4 @@ public class GameScreen {
         gc.fillText("Left: " + leftScore, 50, 30);
         gc.fillText("Right: " + rightScore, 500, 30);
     }
-
 }

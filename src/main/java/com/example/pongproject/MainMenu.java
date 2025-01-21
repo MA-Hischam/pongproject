@@ -9,6 +9,8 @@ public class MainMenu {
     public static void display(Stage primaryStage) {
         // Layout für das Hauptmenü
         VBox layout = new VBox(20);
+        layout.setAlignment(javafx.geometry.Pos.CENTER); // Center align the children
+
         Button startButton = new Button("Start Game");
         Button quitButton = new Button("Quit");
 

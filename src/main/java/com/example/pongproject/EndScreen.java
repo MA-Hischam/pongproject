@@ -3,7 +3,6 @@ package com.example.pongproject;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -26,5 +25,6 @@ public class EndScreen {
         // Endbildschirm Szene
         Scene scene = new Scene(layout, 600, 400);
         primaryStage.setScene(scene);
+        primaryStage.show();  // Ensure the stage is shown
     }
 }
