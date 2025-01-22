@@ -12,8 +12,8 @@ public class GameScreen {
     private static Ball ball;
     private static Paddle leftPaddle;
     private static Paddle rightPaddle;
-    private static int leftScore = 0;
-    private static int rightScore = 0;
+    private static int leftScore;
+    private static int rightScore;
     private static Stage primaryStage;
 
     public static void display(Stage primaryStage) {
@@ -21,6 +21,8 @@ public class GameScreen {
         ball = new Ball(300, 250);
         leftPaddle = new Paddle(10, 250, 10, 100);
         rightPaddle = new Paddle(580, 250, 10, 100);
+        leftScore = 0;
+        rightScore = 0;
 
         // Store the primaryStage in a static variable
         GameScreen.primaryStage = primaryStage;
@@ -30,6 +32,8 @@ public class GameScreen {
 
         Scene scene = new Scene(new StackPane(canvas), 600, 500);
         scene.setOnKeyPressed(GameScreen::handleKeyPress);
+
+
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
@@ -46,16 +50,16 @@ public class GameScreen {
     private static void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case UP:
-                rightPaddle.move(-10);
+                rightPaddle.move(-20);
                 break;
             case DOWN:
-                rightPaddle.move(10);
+                rightPaddle.move(20);
                 break;
             case W:
-                leftPaddle.move(-10);
+                leftPaddle.move(-20);
                 break;
             case S:
-                leftPaddle.move(10);
+                leftPaddle.move(20);
                 break;
         }
     }

@@ -1,11 +1,12 @@
 package com.example.pongproject;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class EndScreen {
@@ -41,13 +42,20 @@ public class EndScreen {
         layout.getChildren().add(0, backgroundImageView); // Add the background image first
 
         // Display winner text
-        Text winnerText = new Text(winner + " Wins!");
-        layout.getChildren().add(winnerText);
+       // Text winnerText = new Text(winner + " Wins!");
+       // layout.getChildren().add(winnerText);
 
         // Back to Main Menu button
         Button backButton = new Button("Back to Main Menu");
+        Button restartButton = new Button("Play again, but faster");
+
         backButton.setOnAction(e -> MainMenu.display(primaryStage));  // Zurück zum Hauptmenü
-        layout.getChildren().add(backButton);
+        restartButton.setOnAction(e -> GameScreen.display(primaryStage));
+
+        VBox buttonLayout = new VBox(20);
+        buttonLayout.setAlignment(Pos.CENTER);
+        buttonLayout.getChildren().addAll(backButton, restartButton);
+        layout.getChildren().add(buttonLayout);
 
         // Endbildschirm Szene
         Scene scene = new Scene(layout, 600, 400);
