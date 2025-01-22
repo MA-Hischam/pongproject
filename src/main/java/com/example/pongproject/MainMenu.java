@@ -26,7 +26,8 @@ public class MainMenu {
         Button startButton = new Button("Start Game");
         Button quitButton = new Button("Quit");
 
-        startButton.setOnAction(e -> GameScreen.display(primaryStage));
+        //startButton.setOnAction(e -> GameScreen.display(primaryStage));
+        startButton.setOnAction(e -> PersonalizationScreen.display(primaryStage));
         quitButton.setOnAction(e -> System.exit(0));  // Beendet das Spiel
 
         // VBox für die Buttons

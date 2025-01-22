@@ -15,6 +15,15 @@ public class GameScreen {
     private static int leftScore;
     private static int rightScore;
     private static Stage primaryStage;
+    private static String leftName;
+    private static String rightName;
+
+    public static void setLeftName(String leftName) {
+        GameScreen.leftName = leftName;
+    }
+    public static void setRightName(String rightName) {
+        GameScreen.rightName = rightName;
+    }
 
     public static void display(Stage primaryStage) {
         // Initialize the ball and paddles
@@ -124,7 +133,7 @@ public class GameScreen {
 
         // Display score
         gc.setFill(javafx.scene.paint.Color.WHITE);
-        gc.fillText("Left: " + leftScore, 50, 30);
-        gc.fillText("Right: " + rightScore, 500, 30);
+        gc.fillText(leftName + ": " + leftScore, 50, 30);
+        gc.fillText(rightName + ": " + rightScore, 500, 30);
     }
 }
