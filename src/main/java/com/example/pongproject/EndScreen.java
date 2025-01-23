@@ -39,6 +39,10 @@ public class EndScreen {
         }
 
         ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(600); // Passe die Größe an die Szene an
+        backgroundImageView.setFitHeight(500); // Passe die Größe an die Szene an
+        backgroundImageView.setPreserveRatio(false);
+
         layout.getChildren().add(0, backgroundImageView); // Add the background image first
 
         // Display winner text
@@ -58,7 +62,7 @@ public class EndScreen {
         layout.getChildren().add(buttonLayout);
 
         // Endbildschirm Szene
-        Scene scene = new Scene(layout, 600, 400);
+        Scene scene = new Scene(layout, 600, 500);
         primaryStage.setScene(scene);
         primaryStage.show();  // Ensure the stage is shown
     }
