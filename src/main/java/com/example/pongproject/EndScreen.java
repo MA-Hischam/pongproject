@@ -45,10 +45,6 @@ public class EndScreen {
 
         layout.getChildren().add(0, backgroundImageView); // Add the background image first
 
-        // Display winner text
-       // Text winnerText = new Text(winner + " Wins!");
-       // layout.getChildren().add(winnerText);
-
         // Back to Main Menu button
         Button backButton = new Button("Back to Main Menu");
         Button restartButton = new Button("Play again, but faster");

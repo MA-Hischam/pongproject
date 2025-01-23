@@ -9,6 +9,7 @@ public class Ball {
         this.y = y;
     }
 
+
     public void move() {
         x += speedX;
         y += speedY;
