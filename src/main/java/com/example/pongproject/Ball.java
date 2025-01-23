@@ -1,7 +1,7 @@
 package com.example.pongproject;
 
 public class Ball {
-    private double x, y, speedX = 3, speedY = 3;
+    private double x, y, speedX = 7, speedY = 7;
     private final double radius = 10;
 
     public Ball(double x, double y) {
