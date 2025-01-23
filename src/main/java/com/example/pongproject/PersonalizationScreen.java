@@ -43,12 +43,12 @@ public class PersonalizationScreen {
         // Buttons erstellen
         Button saveAndStartButton = new Button("Save & Start Game");
         saveAndStartButton.setOnAction(e -> {
-            // Save the input
+            // Save the input and switch to the next scene
             GameScreen.setLeftName(leftName.getText());
             GameScreen.setRightName(rightName.getText());
-            // Switch to the next scene
-            saveAndStartButton.setOnAction(_ -> GameScreen.display(primaryStage));
+            GameScreen.display(primaryStage);
         });
+
 
         Button quitButton = new Button("Quit");
         quitButton.setOnAction(e -> System.exit(0));  // Beendet das Spiel
