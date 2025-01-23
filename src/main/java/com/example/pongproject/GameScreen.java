@@ -18,18 +18,21 @@ public class GameScreen {
     private static Paddle rightPaddle;
     private static int leftScore;
     private static int rightScore;
-    private static Stage primaryStage;
     private static String leftName;
     private static String rightName;
     private static final double PADDLE_SPEED = 4;
     private static final double PADDLE_LIMIT = 500;
     private static Set<KeyCode> activeKeys = new HashSet<>();
+    private static Image backgroundImage;
+    private static AnimationTimer gameTimer;
+    private static Stage primaryStage;
 
-    public static void setLeftName(String leftName) {
-        GameScreen.leftName = leftName;
+    public static void setLeftName(String name) {
+        leftName = name;
     }
-    public static void setRightName(String rightName) {
-        GameScreen.rightName = rightName;
+
+    public static void setRightName(String name) {
+        rightName = name;
     }
 
     public static void display(Stage primaryStage) {
@@ -44,7 +47,7 @@ public class GameScreen {
         Canvas canvas = new Canvas(600, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Image backgroundImage = new Image(GameScreen.class.getResource("/com/example/pongproject/GameScreen.png").toString());
+        backgroundImage = new Image(GameScreen.class.getResource("/com/example/pongproject/GameScreen.png").toString());
         ImageView backgroundImageView = new ImageView(backgroundImage);
         backgroundImageView.setFitWidth(600);
         backgroundImageView.setFitHeight(500);
@@ -57,13 +60,16 @@ public class GameScreen {
         scene.setOnKeyPressed(e -> activeKeys.add(e.getCode()));
         scene.setOnKeyReleased(e -> activeKeys.remove(e.getCode()));
 
-        new AnimationTimer() {
+        gameTimer = new AnimationTimer() {
+            @Override
             public void handle(long currentNanoTime) {
                 update();
                 render(gc);
             }
-        }.start();
+        };
+        gameTimer.start();
 
+        primaryStage.setOnCloseRequest(event -> gameTimer.stop());  // Ensure timer stops on close
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pong Game");
         primaryStage.show();
@@ -122,7 +128,6 @@ public class GameScreen {
     }
 
     private static void render(GraphicsContext gc) {
-        Image backgroundImage = new Image(GameScreen.class.getResource("/com/example/pongproject/GameScreen.png").toString());
         gc.drawImage(backgroundImage, 0, 0, 600, 500);
 
         gc.setFill(javafx.scene.paint.Color.WHITE);
@@ -131,7 +136,6 @@ public class GameScreen {
         gc.fillRect(rightPaddle.getX(), rightPaddle.getY(), rightPaddle.getWidth(), rightPaddle.getHeight());
 
         gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 25));
-
         gc.fillText(leftName + ": " + leftScore, 50, 30);
         gc.fillText(rightName + ": " + rightScore, 430, 30);
     }
